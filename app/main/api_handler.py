@@ -22,10 +22,10 @@ class ApiHandler(Resource):
             print(out)
         return {
             "resultStatus": "SUCCESS",
-            "data": out
+            "text": out
         }
 
-    def post(self, idx=0):
+    def post(self, idx=1):
         print(self)
         parser = reqparse.RequestParser()
         parser.add_argument("type", type=str)
@@ -46,6 +46,6 @@ class ApiHandler(Resource):
         else:
             text = "Not available"
 
-        result = {"status": "Success", "text": text}
+        result = {"resultStatus": "Success", "text": text}
 
         return result

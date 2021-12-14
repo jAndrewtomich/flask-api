@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
 
   useEffect(()=>{
-    axios.get("http://localhost:5000/flask/endpoint").then(response => {
+    axios.get("http://127.0.0.1:5000/flask/endpoint").then(response => {
       console.log("SUCCESS", response)
       setGetMessage(response)
     }).catch(error => {
