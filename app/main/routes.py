@@ -1,7 +1,8 @@
-from flask import render_template, url_for, request, jsonify, current_app
+from flask import current_app
+from flask.helpers import send_from_directory
 from app.main import bp
 
 
 @bp.route('/', defaults={"path":""})
 def serve(path):
-    return render_template("index.html")
+    return send_from_directory(current_app.static_folder, "index.html")
