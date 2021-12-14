@@ -1,4 +1,4 @@
-from flask_restful import Api, Resource, reqparse
+from flask_restful import Resource, reqparse
 from pathlib import Path
 import os
 
@@ -14,9 +14,12 @@ class ApiHandler(Resource):
     def __repr__(self):
         return self.__str__()
 
-    def get(self, idx=0):
-        with open(Path(self.basedir / self.filelist[idx]), 'w') as reader:
+    def get(self, idx=1):
+        tmpth = str(Path(self.basedir / self.filelist[idx]))
+        print(tmpth)
+        with open(tmpth, 'r') as reader:
             out = reader.read()
+            print(out)
         return {
             "resultStatus": "SUCCESS",
             "data": out
