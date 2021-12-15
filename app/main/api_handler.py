@@ -14,31 +14,33 @@ class ApiHandler(Resource):
     def __repr__(self):
         return self.__str__()
 
-    def get(self, idx=1):
-        tmpth = str(Path(self.basedir / self.filelist[idx]))
-        print(tmpth)
-        with open(tmpth, 'r') as reader:
-            out = reader.read()
-            print(out)
+    def get(self):
+        out = []
+        for f in self.filelist[10:20]:
+            tmpth = str(Path(self.basedir / f))
+            with open(tmpth, 'r') as reader:
+                out.append(reader.read())
+        print(out)
         return {
             "resultStatus": "SUCCESS",
             "text": out
         }
 
-    def post(self, idx=1):
+    def post(self):
         print(self)
         parser = reqparse.RequestParser()
-        parser.add_argument("type", type=str)
+        #parser.add_argument("type", type=str)
         parser.add_argument("data", type=str)
+        parser.add_argument("idx", type=int)
 
         args = parser.parse_args()
 
         print(args)
 
-        request_type = args["type"]
-        request_json = args["data"]
+        #request_type = args["type"]
+        request_json = args["data", "idx"]
 
-        ret_status = request_type
+        #ret_status = request_type
         ret_msg = request_json
 
         if ret_msg:
