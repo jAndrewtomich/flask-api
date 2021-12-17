@@ -16,11 +16,10 @@ class ApiHandler(Resource):
 
     def get(self):
         out = []
-        for f in self.filelist[10:20]:
+        for f in self.filelist:
             tmpth = str(Path(self.basedir / f))
             with open(tmpth, 'r') as reader:
                 out.append(reader.read())
-        print(out)
         return {
             "resultStatus": "SUCCESS",
             "text": out
