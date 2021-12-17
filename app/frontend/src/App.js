@@ -14,30 +14,32 @@ function App() {
     );
     const messages = data.text
     setGetMessage(messages);
-    // console.log(messages)
-    // console.log(data.text)
   };
 
-    useEffect(()=>{
-      getMessages();
-    }, []);
+  useEffect(()=>{
+    getMessages();
+  }, []);
 
-  function Summary({ msgs }) {
+  const Summary = () => {
     return (
-      <div className="container">
-      {/* { console.log(getMessage) } */}
-        { getMessage.map(msg => (
-          <Card key={ msg.id }>
+        getMessage.map((msg, index) => (
+          <Card key={ index } style={{ border: '10px', borderStyle: 'solid', borderColor: '#d1d1e0', margin: '20px 0px', textAlign: 'justify'  }}>
             <Card.Body>
-              <Card.Title>{ msg.split(" ").slice(0, 5) }</Card.Title>
-              <Card.Subtitle className="text-muted">{ msg.keywords }</Card.Subtitle>
-              <Card.Text>
-                { msg.summary }
+              <Card.Title style={{ color: "black", fontSize: '1.25em' }}>
+                  { msg.split("*<>*")[0] }
+              </Card.Title>
+              <Card.Subtitle className="text-muted" style={{ fontSize: '.75em', margin: '10px 0px' }}>
+                { msg.split("*<>*")[2] }
+              </Card.Subtitle>
+              <Card.Text style={{ color: "black", fontSize: '.75em' }}>
+                { msg.split("*<>*")[1] }
               </Card.Text>
+              <Card.Link href={ msg.split("*<>*")[3]} style={{ fontSize: '.75em' }} target='_blank'>
+                { msg.split("*<>*")[3]}
+              </Card.Link>
             </Card.Body>
           </Card>
-        ))}
-      </div>
+        ))
     );
   }
 
@@ -45,35 +47,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          React + Flask Tutorial
-        </p>
-        { console.log(getMessage) }
-        { /*<Summary
-          items = { getMessage }
-        /> */}
-        <div className="container">
-        { getMessage.map(msg => (
-          <Card key={ msg.id }>
-            <Card.Body>
-              <Card.Title style={{ color: "black", fontSize: '1.5em' }}>{ msg.split("Title :")[1].split("Summary :")[0] }</Card.Title>
-              <Card.Subtitle className="text-muted" style={{ fontSize: '1em'}}>{ msg.split("*<>*")[2] }</Card.Subtitle>
-              <Card.Text style={{ color: "black" }}>
-                { msg.split("*<>*")[1] }
-              </Card.Text>
-              <Card.Link href={ msg.split("*<>*")[3]}>{ msg.split("*<>*")[3]}</Card.Link>
-            </Card.Body>
-          </Card>
-        ))}
-      </div> 
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 style={{ fontSize: '2em' }}>
+         ANDREW'S NEWS AGGREGATION 
+        </h1>
+        <div className="container-fluid" style={{ maxWidth: '80%'}}>
+          <Summary/>
+        </div>
       </header>
     </div>
   );
