@@ -1,12 +1,11 @@
 from flask_restful import Resource, reqparse
-from pathlib import Path
-import os
+from sqlalchemy import create_engine
+from app.models import Article
 
 
 class ApiHandler(Resource):
     def __init__(self):
-        self.basedir = Path("/home/at/Coding/py/text_summarizer/output")
-        self.filelist = os.listdir(self.basedir)
+        self.conn = create_engine('sqlite:///news.db').connect()
 
     def __str__(self):
         return "ApiHandler -=- basedir: {}".format(str(self.basedir))
@@ -15,14 +14,12 @@ class ApiHandler(Resource):
         return self.__str__()
 
     def get(self):
-        out = []
-        for f in self.filelist:
-            tmpth = str(Path(self.basedir / f))
-            with open(tmpth, 'r') as reader:
-                out.append(reader.read())
+        with self.conn as connection:
+            q = [{'title': r.title, 'summary': r.summary, 'keywords': r.keywords, 'link': r.link} for r in Article.query.all()]
+            data = [{'title': p['title'], 'summary': p['summary'], 'keywords': p['keywords'], 'link': p['link']} for p in q]
         return {
             "resultStatus": "SUCCESS",
-            "text": out
+            "data": data
         }
 
     def post(self):
