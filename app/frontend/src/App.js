@@ -12,13 +12,14 @@ function App() {
     const { data } = await axios.get(
       "http://127.0.0.1:5000/flask/endpoint"
     );
-    const messages = data.text
+    const messages = data.data
     setGetMessage(messages);
   };
 
   useEffect(()=>{
     getMessages();
   }, []);
+  
 
   const Summary = () => {
     return (
@@ -26,16 +27,16 @@ function App() {
           <Card key={ index } style={{ border: '10px', borderStyle: 'solid', borderColor: '#d1d1e0', margin: '20px 0px', textAlign: 'justify'  }}>
             <Card.Body>
               <Card.Title style={{ color: "black", fontSize: '1.25em' }}>
-                  { msg.split("*<>*")[0] }
+                  { msg['title'] }
               </Card.Title>
               <Card.Subtitle className="text-muted" style={{ fontSize: '.75em', margin: '10px 0px' }}>
-                { msg.split("*<>*")[2] }
+                { msg['keywords'] }
               </Card.Subtitle>
               <Card.Text style={{ color: "black", fontSize: '.75em' }}>
-                { msg.split("*<>*")[1] }
+                { msg['summary'] }
               </Card.Text>
-              <Card.Link href={ msg.split("*<>*")[3]} style={{ fontSize: '.75em' }} target='_blank'>
-                { msg.split("*<>*")[3]}
+              <Card.Link href={ msg['link']} style={{ fontSize: '.75em' }} target='_blank'>
+                { msg['link']}
               </Card.Link>
             </Card.Body>
           </Card>
