@@ -9,11 +9,5 @@ class Article(db.Model):
     keywords = db.Column(db.String())
     link = db.Column(db.String())
 
-    def __init__(self, title, summary, keywords, link):
-        self.title = title
-        self.summary = summary
-        self.keywords = keywords
-        self.link = link
-
     def __repr__(self):
-        return f'<id {self.id}'
+        return f'<id> {self.id}'
