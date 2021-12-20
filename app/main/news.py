@@ -16,7 +16,7 @@ def extract_headlines(url):
     for tag in soup.find_all("td", attrs={"class": "title", "valign": ""}):
         if (link_url := tag.a["href"])[:4] != "http":
             link_url = "https://news.ycombinator.com/" + link_url
-        
+
         hlList.append(link_url)
     
     return hlList[:-1]
@@ -26,7 +26,7 @@ def generate_summaries(hlList):
 
     def get_only_text(url):
         try:
-            page = get(url)
+            page = get(url, timeout=10)
             soup = BeautifulSoup(page.content, "lxml")
             text = ' '.join(map(lambda p: p.text.strip(), soup.find_all('p')))
             title = "Default Title" if not soup.title else ' '.join(soup.title.stripped_strings)
