@@ -1,11 +1,12 @@
 from flask_restful import Resource, reqparse
-from sqlalchemy import create_engine
+#from sqlalchemy import create_engine
 from app.models import Article
 
 
 class ApiHandler(Resource):
     def __init__(self):
-        self.conn = create_engine('sqlite:///news.db').connect()
+        #self.conn = create_engine('sqlite:///news.db').connect()
+        self.table = Article
 
     def __str__(self):
         return "ApiHandler -=- engine: sqlite:///news.db"
@@ -14,9 +15,9 @@ class ApiHandler(Resource):
         return self.__str__()
 
     def get(self):
-        with self.conn as connection:
-            q = [{'title': r.title, 'summary': r.summary, 'keywords': r.keywords, 'link': r.link} for r in Article.query.all()]
-            data = [{'title': p['title'], 'summary': p['summary'], 'keywords': p['keywords'], 'link': p['link']} for p in q]
+        #with self.conn as connection:
+        q = [{'title': r.title, 'summary': r.summary, 'keywords': r.keywords, 'link': r.link} for r in self.table.query.all()]
+        data = [{'title': p['title'], 'summary': p['summary'], 'keywords': p['keywords'], 'link': p['link']} for p in q]
         return {
             "resultStatus": "SUCCESS",
             "data": data
