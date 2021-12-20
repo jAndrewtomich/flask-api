@@ -2,3 +2,5 @@ venv
 .flaskenv
 __pycache__/
 news.db
+startup
+atv
