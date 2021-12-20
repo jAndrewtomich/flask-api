@@ -6,20 +6,20 @@ from gensim.summarization import keywords # get keywords from summary
 from app.models import Article
 from app import db
 
+
 class NewsHandler():
-    def __init__(self, file=None, app=None):
+    def __init__(self, file=None):
         if file:
             with open(file, 'r') as reader:
                 urls = reader.readlines()
 
         self.urls = urls if file else input('Enter URL: ')
         self.hlList = self.extract_headlines()
-        self.app = app
 
-    def extract_headlines(self):
+    def extract_headlines(url):
         hlList = []
         print("Extracting Stories ...")
-        response = get(self.urls)
+        response = get(url)
         content = response.content
         soup = BeautifulSoup(content, "lxml")
 
@@ -59,6 +59,6 @@ class NewsHandler():
             except ValueError as e:
                 summary = "Inadequate text structure.  This text cannot be summarized.  This is default text.  This might be summarized."
 
-            with self.app.app_context(): 
-                db.session.add(Article(title, summary, k_l_words, hl))
-                db.session.commit()
+            article = Article(title=title, summary=summary, keywords=k_l_words, link=hl)
+            db.session.add(article)
+            db.session.commit()
