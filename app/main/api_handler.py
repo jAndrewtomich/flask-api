@@ -8,7 +8,7 @@ class ApiHandler(Resource):
         self.conn = create_engine('sqlite:///news.db').connect()
 
     def __str__(self):
-        return "ApiHandler -=- basedir: {}".format(str(self.basedir))
+        return "ApiHandler -=- engine: sqlite:///news.db"
 
     def __repr__(self):
         return self.__str__()
