@@ -10,7 +10,7 @@ function App() {
 
   const getMessages = async () => {
     const { data } = await axios.get(
-      "http://127.0.0.1:5000/flask/endpoint"
+      "http://127.0.0.1:5000/"
     );
     const messages = data.data
     setGetMessage(messages);
@@ -19,7 +19,7 @@ function App() {
   useEffect(()=>{
     getMessages();
   }, []);
-  
+
 
   const Summary = () => {
     return (
