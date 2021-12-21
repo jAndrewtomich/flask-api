@@ -53,6 +53,6 @@ def generate_summaries(hlList):
             summary = ' '.join(c for c in summary.split() if c.isalnum())
         except ValueError:
             summary = "Inadequate text structure.  This text cannot be summarized.  This is default text.  This might be summarized."
-        print(k_l_words)
+
         db.session.add(Article(title=hl[1], summary=' '.join(summary.split()[:100]), keywords=' '.join(random.sample(k_l_words.split(), int(len(k_l_words.split()) * .20))) if len(k_l_words.split()) >= 5 else k_l_words, link=hl[0]))
         db.session.commit()
