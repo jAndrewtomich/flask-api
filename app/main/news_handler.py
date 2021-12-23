@@ -3,13 +3,13 @@ from requests.exceptions import ConnectionError, MissingSchema, ReadTimeout
 from bs4 import BeautifulSoup # html parsing
 from gensim.summarization.summarizer import summarize # extractive text summarization
 from gensim.summarization import keywords
-from requests.models import MissingSchema # get keywords from summary
 from app.models import Article
 from app import db
-import random
+import random, sys
 
 
 def extract_headlines(urlList):
+    sys.stdout = open('output.txt', 'a')
     hlList = []
     for url in urlList:
         print("Extracting Stories ...")
@@ -20,12 +20,14 @@ def extract_headlines(urlList):
         for tag in soup.find_all("td", attrs={"class": "title", "valign": ""}):
             if (link_url := tag.a["href"])[:4] != "http":
                 link_url = "https://news.ycombinator.com/" + link_url
-
-            hlList.append([link_url, tag.a.text])
-    
+            
+            if tag.a.text != 'More':
+                hlList.append([link_url, tag.a.text])
+    sys.stdout.close()
     return hlList[:-1]
 
 def generate_summaries(hlList):
+    sys.stdout = open('output.txt', 'a')
 
     def get_only_text(url):
         try:
@@ -45,6 +47,7 @@ def generate_summaries(hlList):
         if title is None:
             print(f"Error : {hl[0]} : {text}")
             continue
+    
 
         k_l_words = keywords(text, lemmatize=True)
 
@@ -56,3 +59,5 @@ def generate_summaries(hlList):
 
         db.session.add(Article(title=hl[1], summary=' '.join(summary.split()[:100]), keywords=' '.join(random.sample(k_l_words.split(), int(len(k_l_words.split()) * .20))) if len(k_l_words.split()) >= 5 else k_l_words, link=hl[0]))
         db.session.commit()
+
+    sys.stdout.close()    
