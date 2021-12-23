@@ -4,3 +4,8 @@ news.db
 startup
 atv
 logs
+flask_err.txt
+flask_output.txt
+npm_err.txt
+npm_output.txt
+output.txt

@@ -1,0 +1,25 @@
+startup: line 3: ../../tee: No such file or directory
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://172.26.50.243:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+assets by path static/ 2.42 MiB
+  asset static/js/bundle.js 2.41 MiB [emitted] (name: main) 1 related asset
+  asset static/js/node_modules_web-vitals_dist_web-vitals_js.chunk.js 6.88 KiB [emitted] 1 related asset
+  asset static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg 2.57 KiB [emitted] (auxiliary name: main)
+asset index.html 1.67 KiB [emitted]
+asset asset-manifest.json 546 bytes [emitted]
+cached modules 2.25 MiB (javascript) 31.5 KiB (runtime) [cached] 185 modules
+webpack 5.65.0 compiled successfully in 808 ms
