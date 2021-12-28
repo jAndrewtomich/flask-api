@@ -9,3 +9,4 @@ flask_output.txt
 npm_err.txt
 npm_output.txt
 output.txt
+.venv
