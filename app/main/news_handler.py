@@ -9,7 +9,7 @@ import random, sys
 
 
 def extract_headlines(urlList):
-    sys.stdout = open('output.txt', 'a')
+    sys.stdout = open('/home/at/Coding/python/projects/flask_api/app.out', 'w')
     hlList = []
     for url in urlList:
         print("Extracting Stories ...")
@@ -27,7 +27,7 @@ def extract_headlines(urlList):
     return hlList[:-1]
 
 def generate_summaries(hlList):
-    sys.stdout = open('output.txt', 'a')
+    sys.stdout = open('/home/at/Coding/python/projects/flask_api/app.out', 'a')
 
     def get_only_text(url):
         try:
