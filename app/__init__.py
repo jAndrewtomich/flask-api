@@ -15,8 +15,6 @@ def create_app():
     app.config.from_object(env_config)
 
     db.init_app(app)
-    with app.app_context():
-        db.create_all()
 
     cors.init_app(app)
     api.init_app(app)
