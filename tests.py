@@ -41,3 +41,4 @@ class ArticleModelCase(unittest.TestCase):
     def test_create_article(self):
         db.session.add(Article('A Testing Title', 'Here is a quick summary of the text...', 'Keywords...', 'https://news.ycombinator.com'))
         db.session.commit()
+    
