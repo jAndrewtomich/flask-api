@@ -15,7 +15,9 @@ def first_get_news():
 def get_news():
     hlList = news_handler.extract_headlines(['https://news.ycombinator.com'])
     test_link = db.session.query(models.Article).first()
+    #print(test_link)
     if test_link is not None: test_link = test_link.link
+    #print(test_link)
     if test_link != hlList[0][0]:
         news_handler.generate_summaries(hlList)
 
