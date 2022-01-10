@@ -10,7 +10,7 @@ function App() {
 
   const getMessages = async () => {
     const { data } = await axios.get(
-      "http://172.20.191.78:5001/"
+      "http://172.22.67.84:5001/"
     );
     const messages = data.data
     setGetMessage(messages);
