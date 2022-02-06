@@ -35,4 +35,3 @@ def create_app():
         app.logger.info('Flask API Startup')
 
     return app
-
